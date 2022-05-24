@@ -1,0 +1,36 @@
+<template>
+  <div class="mt-3">
+    <div class="text-secondary text-center">
+      Welcome back
+      <span class="font-weight-bold text-info">{{ userName }}</span>
+    </div>
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-10 col-md-10 col-lg-8 col-xl-7">
+          <h4 class="display-4 text-primary mb-2">Security Dashboard</h4>
+          <p class="lead">
+            This simple app implements a security dashboard were admins can have
+            a general overview of the location of enterprise vehicles, and
+            drivers can track their own progress and be directed to end users.
+          </p>
+          <router-link class="btn btn-outline-primary me-2" to="/register"
+            >Register</router-link
+          >
+          <router-link class="btn btn-outline-primary me-2" to="/login"
+            >Log In</router-link
+          >
+          <router-link class="btn btn-primary" to="/dashboard"
+            >Dashboard</router-link
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HomeView",
+  props: ["userName"],
+};
+</script>
