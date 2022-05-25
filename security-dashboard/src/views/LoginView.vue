@@ -49,7 +49,7 @@ export default {
   name: "LoginView",
   data() {
     return {
-      urlBase: "http://localhost:5000",
+      urlBase: "http://52.14.206.240:5000",
       user: {
         userName: "",
         password: "",
