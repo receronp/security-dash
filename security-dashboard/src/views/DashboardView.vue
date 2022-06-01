@@ -59,5 +59,6 @@ export default {
 	components: {
 		PlanetChart,
 	},
+	props: ['userName', 'userType'],
 };
 </script>
