@@ -4,7 +4,7 @@
 
 		<div class="row">
 			<div class="column3">
-				<div class="card">
+				<div class="cardn">
 					<img src="../assets/toDoList.svg" width="50px" height="50px" />
 						VAR_CASOS
 					<p>Promedio de casos diarios</p>
@@ -12,7 +12,7 @@
 			</div>
 
 			<div class="column3">
-				<div class="card">
+				<div class="cardn">
 					<img src="../assets/reloj.svg" width="50px" height="50px" />
 							VAR_CASOS
 					<p>Tiempo promedio de respuesta</p>
@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="column3">		
-				<div class="card">
+				<div class="cardn">
 					<img src="../assets/graph.svg" width="50px" height="50px" />
 						VAR_CASOS
 					<p>Mejora en tiempo de respuesta</p>
@@ -28,40 +28,42 @@
 			</div>
 		</div>
 
-		<div class="unidadesActivasContainer">
-			<div class="container">
-				<ul>
-					<li>
+		<div class ="row">
+			<div class="column2">
+				<div class="row">	
+					<div class="card">	
 						Unidad VARIABLE_NUMERO_UNIDAD<br />
 						VARIABLE_LOCACION_UNIDAD<br />
 						VARIABLE_DESCRIPCION_UNIDAD<br />
 						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-					</li>
-					<li>
+					</div>
+				</div>
+
+				<div class="row">	
+					<div class="card">	
 						Unidad VARIABLE_NUMERO_UNIDAD<br />
 						VARIABLE_LOCACION_UNIDAD<br />
 						VARIABLE_DESCRIPCION_UNIDAD<br />
 						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-					</li>
-					<li>
+					</div>
+				</div>
+				<div class="row">	
+					<div class="card">	
 						Unidad VARIABLE_NUMERO_UNIDAD<br />
 						VARIABLE_LOCACION_UNIDAD<br />
 						VARIABLE_DESCRIPCION_UNIDAD<br />
 						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-					</li>
-					<li>
-						Unidad VARIABLE_NUMERO_UNIDAD<br />
-						VARIABLE_LOCACION_UNIDAD<br />
-						VARIABLE_DESCRIPCION_UNIDAD<br />
-						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-					</li>
-				</ul>
+					</div>
+				</div>
+			</div>
+			<div class="column2">
+				grafiquisima
 			</div>
 		</div>
-	
+
 		<div class="row">
 			<div class="column2">
-				<div class="card">
+				<div class="cardn">
 					<img src="../assets/dashboard.svg" width="50px" height="50px" />
 						VAR_CASOS	
 					<div class="container">
@@ -71,7 +73,7 @@
 			</div>
 
 			<div class="column2">
-				<div class="card">
+				<div class="cardn">
 					<img src="../assets/conference.svg" width="50px" height="50px" />
 						VAR_CASOS
 					<div class="container">
@@ -100,13 +102,13 @@ export default {
 .column3 {
   float: left;
   width: 33%;
-  padding: 0 10px;
+  padding: 10px 10px;
 }
 
 .column2{
   float: left;
   width: 40%;
-  padding: 0 10px;
+  padding: 10px 10px;
   justify-content: center;
   align-content: center;
 }
@@ -134,11 +136,36 @@ export default {
 
 /* Style the counter cards */
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 8px;
   padding: 16px;
   text-align: center;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  transition: 0.3s;
 }
+.cardn {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 8px;	
+  padding: 16px;
+  text-align: center;
+  background-color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.card:hover {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 16px;
+  padding: 16px;
+  text-align: center;
+  background-color: #edf4ff;
+}
+
+.card:onclick {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 16px;
+  padding: 16px;
+  text-align: center;
+  background-color: #cddffd;
+}
+
 .container {
   padding: 2px 16px;
 }
