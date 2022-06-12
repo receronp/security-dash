@@ -3,9 +3,9 @@ const mysql = require('mysql');
 
 
 const login = async (req, res) => {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
     const pool = await dataConn.getConnection();
-    const sql = "select Id, userName, name, profile from users where userName = " + mysql.escape(userName) + " and password = " + mysql.escape(password);
+    const sql = "select id, username, name, profile from users where username = " + mysql.escape(username) + " and password = " + mysql.escape(password);
 
     pool.query(sql, function (err, result, fields) {
         if (err) throw err;
