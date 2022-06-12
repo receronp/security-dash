@@ -2,7 +2,7 @@
   <div class="mt-3">
     <div class="text-secondary text-center">
       Welcome back
-      <span class="font-weight-bold text-info">{{ userName }}</span>
+      <span class="font-weight-bold text-info">{{ username }}</span>
     </div>
     <div class="container text-center">
       <div class="row justify-content-center">
@@ -31,6 +31,6 @@
 <script>
 export default {
   name: "HomeView",
-  props: ["userName"],
+  props: ["username"],
 };
 </script>

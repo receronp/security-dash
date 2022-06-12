@@ -1,6 +1,6 @@
 <template>
   <NavigationComponent />
-  <router-view class="container" :userName="userName" />
+  <router-view class="container" :username="username" />
 </template>
 
 <script>
@@ -13,8 +13,8 @@ export default {
   },
   data() {
     return {
-      userName: "",
-      userType: "",
+      username: "",
+      user_type: "",
     };
   },
   methods: {
@@ -22,8 +22,8 @@ export default {
       const sessionData = sessionStorage.getItem("sessionData");
       if (sessionData != null) {
         const objSessionData = JSON.parse(sessionData);
-        this.userName = objSessionData.userName;
-        this.userType = objSessionData.profile;
+        this.username = objSessionData.username;
+        this.user_type = objSessionData.profile;
       }
     },
   },

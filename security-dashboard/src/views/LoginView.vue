@@ -11,7 +11,7 @@
           type="text"
           class="form-control"
           placeholder="User Name"
-          v-model="user.userName"
+          v-model="user.username"
         />
       </div>
       <div class="col-sm-3"></div>
@@ -51,7 +51,7 @@ export default {
     return {
       urlBase: "http://localhost:5000",
       user: {
-        userName: "",
+        username: "",
         password: "",
       },
     };
@@ -59,7 +59,7 @@ export default {
   methods: {
     async login() {
       var data = {
-        userName: this.user.userName,
+        username: this.user.username,
         password: this.user.password,
       };
 
@@ -69,7 +69,7 @@ export default {
         window.location.href = "index.html";
       } else {
         alert("Usuario o contraseña invalidos");
-        this.user.userName = "";
+        this.user.username = "";
         this.user.password = "";
       }
     },

@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  props: ["userName", "userType"],
+  props: ["username", "user_type"],
 };
 </script>
 
