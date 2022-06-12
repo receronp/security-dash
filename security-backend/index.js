@@ -4,6 +4,7 @@ const cors = require("cors")
 const userRoutes = require("./user.routes")
 const vehicleRoutes = require("./vehicle.routes")
 const caseRoutes = require("./case.routes")
+const reportRoutes = require("./report.routes")
 
 const app = express();
 
@@ -16,4 +17,6 @@ app.listen(5000);
 app.use(userRoutes);
 app.use(vehicleRoutes);
 app.use(caseRoutes);
+app.use(reportRoutes);
+
 console.log("Server listening...");
