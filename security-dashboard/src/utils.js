@@ -19,8 +19,7 @@ const CallApi = async (url, method, data) => {
   }
 };
 
-// const urlBase = "http://52.14.206.240:5000";
-const urlBase = "http://localhost:5000";
+const urlBase = "http://52.14.206.240:5000";
 
 module.exports = {
   CallApi: CallApi,
