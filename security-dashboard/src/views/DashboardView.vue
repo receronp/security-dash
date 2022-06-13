@@ -1,12 +1,6 @@
 <template>
 	<div>
 		<h3>Unidades Activas</h3>
-<<<<<<< Updated upstream
-		<div class="unidadesActivasContainer">
-			<div class="container">
-				<ul>
-					<li>
-=======
 
 		<div class="row">
 			<div class="column3">
@@ -38,48 +32,27 @@
 			<div class="column2">
 				<div class="row">	
 					<div v-on:click="show1" class="card">	
->>>>>>> Stashed changes
 						Unidad VARIABLE_NUMERO_UNIDAD<br />
 						VARIABLE_LOCACION_UNIDAD<br />
 						VARIABLE_DESCRIPCION_UNIDAD<br />
 						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-<<<<<<< Updated upstream
-					</li>
-					<li>
-=======
 					</div>
 				</div>
 
 				<div class="row">	
 					<div v-on:click="show2" class="card">	
->>>>>>> Stashed changes
 						Unidad VARIABLE_NUMERO_UNIDAD<br />
 						VARIABLE_LOCACION_UNIDAD<br />
 						VARIABLE_DESCRIPCION_UNIDAD<br />
 						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-<<<<<<< Updated upstream
-					</li>
-					<li>
-=======
 					</div>
 				</div>
 				<div class="row">	
 					<div v-on:click="login" class="card">	
->>>>>>> Stashed changes
 						Unidad VARIABLE_NUMERO_UNIDAD<br />
 						VARIABLE_LOCACION_UNIDAD<br />
 						VARIABLE_DESCRIPCION_UNIDAD<br />
 						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-<<<<<<< Updated upstream
-					</li>
-					<li>
-						Unidad VARIABLE_NUMERO_UNIDAD<br />
-						VARIABLE_LOCACION_UNIDAD<br />
-						VARIABLE_DESCRIPCION_UNIDAD<br />
-						VARIABLE_CALIFICACION_UNIDAD && VARIALBE_NUMERO_REVIEWS<br />
-					</li>
-				</ul>
-=======
 					</div>
 				</div>
 			</div>
@@ -88,7 +61,6 @@
 				<div id="change">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d230075.82653108437!2d-100.30430391225585!3d25.706583021651895!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1654902816413!5m2!1ses-419!2smx" width="640" height="460" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 				</div>
->>>>>>> Stashed changes
 			</div>
 		</div>
 
@@ -112,62 +84,51 @@
 </template>
 
 <script>
-<<<<<<< Updated upstream
-import PlanetChart from '../components/PlanetChart.vue';
-
-export default {
-	name: 'graph',
-	components: {
-		PlanetChart,
-	},
-	props: ['userName', 'userType'],
-};
-</script>
-=======
 export default {
 
-name: "LoginView",
-  data() {
-    return {
-    	urlBase: "http://52.14.206.240:5000",
-		vehicle: {
-			id: ""
-		}
-    };
+	name: "DashboardView",
+  	data() {
+		return {
+			urlBase: "http://52.14.206.240:5000",
+			vehicle: {
+				id: ""
+			}
+		};
   },
 
-  methods: {
-    async login() {
-	var data = {
-		id : this.vehicle.id
-	};
-      const result = await this.CallApi(this.urlBase + "/vehicle", "GET", data);
-      if (result.length > 0) {
-        sessionStorage.setItem("sessionData", JSON.stringify(result[0]));
-      } else {
-        alert("No se encontraron vehiculos");
-      }
-    },
-    async CallApi(url, method, data) {
-      const header =
-        data == null
-          ? {
-              method: method,
-              headers: { "Content-Type": "application/json" },
-            }
-          : {
-              method: method,
-              body: JSON.stringify(data),
-              headers: { "Content-Type": "application/json" },
-            };
+	methods: {
+		async login() {
+			var data = {
+				location : this.vehicle.location
+			};
+			const result = await this.CallApi(this.urlBase + "/vehicle/1", "GET", data);
+			if (result.length > 0) {
+				sessionStorage.setItem("sessionData", JSON.stringify(result[0]));
+			} else {
+				alert("No se encontraron vehiculos");
+			}
+		},
 
-      try {
-        const response = await fetch(url, header);
-        return await response.json();
-      } catch (error) {
-        alert("Hubo un error favor de contactar al admnistrador.");
-      }
-    },
+    	async CallApi(url, method, data) {
+		const header =
+			data == null
+			? {
+				method: method,
+				headers: { "Content-Type": "application/json" },
+			}
+			: {
+				method: method,
+				body: JSON.stringify(data),
+				headers: { "Content-Type": "application/json" },
+			};
+
+			try {
+				const response = await fetch(url, header);
+				return await response.json();
+			} catch (error) {
+				alert("Hubo un error favor de contactar al admnistrador.");
+			}
+		},
 
 		show1(){
 			document.getElementById('change').innerHTML = "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.9204046771642!2d-100.25112318561165!3d25.67393311849506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662c00409b89a13%3A0xaaeb21f443782a10!2sC.%207%2C%20La%20Quinta%2C%20Guadalupe%2C%20N.L.!5e0!3m2!1ses-419!2smx!4v1654917065391!5m2!1ses-419!2smx' width='650' height='460' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>";
@@ -180,7 +141,7 @@ name: "LoginView",
 		show3(){
 			document.getElementById('change').innerHTML = "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.604306937225!2d-100.33717928561211!3d25.651255119425027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662be133c7c1df7%3A0xab85d8fcb4d1f64a!2sFashion%20Drive!5e0!3m2!1ses-419!2smx!4v1654917771348!5m2!1ses-419!2smx' width='650' height='460' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>";
 		}
-  },
+	},
   
 	mounted() {
 		sessionStorage.removeItem("sessionData");
@@ -266,4 +227,3 @@ name: "LoginView",
   padding: 2px 16px;
 }
 </style>
->>>>>>> Stashed changes
