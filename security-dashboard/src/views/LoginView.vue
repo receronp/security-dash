@@ -46,6 +46,7 @@
 
 <script>
 export default {
+<<<<<<< Updated upstream
 	name: 'LoginView',
 	data() {
 		return {
@@ -62,6 +63,24 @@ export default {
 				userName: this.user.userName,
 				password: this.user.password,
 			};
+=======
+  name: "LoginView",
+  data() {
+    return {
+      urlBase: "http://52.14.206.240:5000",
+      user: {
+        userName: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async login() {
+      var data = {
+        userName: this.user.userName,
+        password: this.user.password,
+      };
+>>>>>>> Stashed changes
 
 			const result = await this.CallApi(this.urlBase + '/user', 'POST', data);
 			if (result.length > 0) {
