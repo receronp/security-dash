@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <div class="text-secondary text-center">
+    <div v-if="username" class="text-secondary text-center">
       Welcome back
       <span class="font-weight-bold text-info">{{ username }}</span>
     </div>
@@ -13,14 +13,23 @@
             a general overview of the location of enterprise vehicles, and
             drivers can track their own progress and be directed to end users.
           </p>
-          <router-link class="btn btn-outline-primary me-2" to="/register"
-            >Register</router-link
-          >
-          <router-link class="btn btn-outline-primary me-2" to="/login"
+          <router-link v-if="!username" class="btn btn-primary me-2" to="/login"
             >Log In</router-link
           >
-          <router-link class="btn btn-primary" to="/dashboard"
+          <router-link
+            v-if="role == 'admin'"
+            class="btn btn-primary me-2"
+            to="/register"
+            >Register User</router-link
+          >
+          <router-link
+            v-if="role == 'admin'"
+            class="btn btn-primary me-2"
+            to="/dashboard"
             >Dashboard</router-link
+          >
+          <router-link v-if="username" class="btn btn-primary" to="/logout"
+            >Log Out</router-link
           >
         </div>
       </div>
@@ -31,6 +40,6 @@
 <script>
 export default {
   name: "HomeView",
-  props: ["username"],
+  props: ["username", "role"],
 };
 </script>

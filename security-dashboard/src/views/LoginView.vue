@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <h1>Login</h1>
     <div class="row">
       <div class="col-sm-3"></div>
@@ -49,6 +49,7 @@ import { CallApi, urlBase } from "@/utils";
 
 export default {
   name: "LoginView",
+  props: ["username"],
   data() {
     return {
       user: {
@@ -76,7 +77,9 @@ export default {
     },
   },
   mounted() {
-    sessionStorage.removeItem("sessionData");
+    if (this.username !== "") {
+      window.location.href = "index.html";
+    }
   },
 };
 </script>

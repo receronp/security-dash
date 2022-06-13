@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <h3>Unidades Activas</h3>
 
     <div class="row">
@@ -83,6 +83,7 @@
 import { CallApi, urlBase } from "@/utils";
 
 export default {
+  props: ["role"],
   data() {
     return {
       vehicles: null,
@@ -91,7 +92,6 @@ export default {
       center: { lat: 25.706583, lng: -100.304304 },
     };
   },
-
   methods: {
     show(id) {
       console.log(this.vehicles[id]);
@@ -108,12 +108,16 @@ export default {
   },
 
   async mounted() {
-    const result = await CallApi(urlBase + "/vehicle", "GET", null);
-    if (result.length > 0) {
-      sessionStorage.setItem("vehicleData", JSON.stringify(result));
-      this.vehicles = result;
+    if (this.role !== "admin") {
+      window.location.href = "index.html";
     } else {
-      alert("No se encontraron vehiculos");
+      const result = await CallApi(urlBase + "/vehicle", "GET", null);
+      if (result.length > 0) {
+        sessionStorage.setItem("vehicleData", JSON.stringify(result));
+        this.vehicles = result;
+      } else {
+        alert("No se encontraron vehiculos");
+      }
     }
   },
 };

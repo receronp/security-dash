@@ -1,6 +1,8 @@
 <template>
-  <NavigationComponent />
-  <router-view class="container" :username="username" />
+  <div>
+    <NavigationComponent :username="username" :role="role" />
+    <router-view class="container" :username="username" :role="role" />
+  </div>
 </template>
 
 <script>
@@ -14,7 +16,7 @@ export default {
   data() {
     return {
       username: "",
-      userType: "",
+      role: "",
     };
   },
   methods: {
@@ -23,7 +25,7 @@ export default {
       if (sessionData != null) {
         const objSessionData = JSON.parse(sessionData);
         this.username = objSessionData.username;
-        this.userType = objSessionData.profile;
+        this.role = objSessionData.profile;
       }
     },
   },

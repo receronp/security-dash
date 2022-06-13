@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <h1>Register</h1>
     <div class="row">
       <div class="col-sm-3"></div>
@@ -82,6 +82,7 @@ import { CallApi, urlBase } from "@/utils";
 
 export default {
   name: "RegisterView",
+  props: ["role"],
   data() {
     return {
       user: {
@@ -118,6 +119,11 @@ export default {
         this.user.password = "";
       }
     },
+  },
+  mounted() {
+    if (this.role !== "admin") {
+      window.location.href = "index.html";
+    }
   },
 };
 </script>
