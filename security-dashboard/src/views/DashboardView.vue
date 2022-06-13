@@ -6,24 +6,42 @@
       <div class="col vehicle-list">
         <div class="cardn">
           <img src="../assets/toDoList.svg" width="50px" height="50px" />
-          VAR_CASOS
-          <p>Promedio de casos diarios</p>
+          <br />
+          <div id="cases" class="container">
+            <p>Escoga una unidad para desplegar los datos.</p>
+          </div>
+          <p>Casos resueltos</p>
         </div>
       </div>
 
       <div class="col vehicle-list">
         <div class="cardn">
           <img src="../assets/reloj.svg" width="50px" height="50px" />
-          VAR_CASOS
+          <br />
+          <div id="timeAvg" class="container">
+            <p>Escoga una unidad para desplegar los datos.</p>
+          </div>
           <p>Tiempo promedio de respuesta</p>
+        </div>
+      </div>
+      <div class="col vehicle-list">
+        <div class="cardn">
+          <img src="../assets/dashboard.svg" width="50px" height="50px" />
+          <br />
+          <div id="commute" class="container">
+            <p>Escoga una unidad para desplegar los datos.</p>
+          </div>
+          <p>Distancia de traslado durante el día.</p>
         </div>
       </div>
 
       <div class="col vehicle-list">
         <div class="cardn">
-          <img src="../assets/graph.svg" width="50px" height="50px" />
-          VAR_CASOS
-          <p>Mejora en tiempo de respuesta</p>
+          <img src="../assets/conference.svg" width="50px" height="50px" />
+          <div id="talk" class="container">
+            <p>Escoga una unidad para desplegar los datos.</p>
+          </div>
+          <p>Número de capacitaciones mensuales.</p>
         </div>
       </div>
     </div>
@@ -54,28 +72,6 @@
         </GMapMap>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="cardn">
-          <img src="../assets/dashboard.svg" width="50px" height="50px" />
-          <br />
-          <div id="commute" class="container">
-            <p>Escoga una unidad para desplegar los datos.</p>
-          </div>
-          <p>Distancia de traslado durante el día.</p>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="cardn">
-          <img src="../assets/conference.svg" width="50px" height="50px" />
-          <div id="talk" class="container">
-            <p>Escoga una unidad para desplegar los datos.</p>
-          </div>
-          <p>Participaciones en capacitaciones mensuales.</p>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -88,18 +84,40 @@ export default {
     return {
       vehicles: null,
       markers: null,
-      seen: 0,
       center: { lat: 25.706583, lng: -100.304304 },
     };
   },
   methods: {
-    show(id) {
+    async show(id) {
+      var element;
       console.log(this.vehicles[id]);
-      const element = document.getElementById("commute");
+      element = document.getElementById("commute");
       element.innerHTML = "<p>" + String(this.vehicles[id].commute) + " km</p>";
-      const element2 = document.getElementById("talk");
-      element2.innerHTML = "<p>" + String(this.vehicles[id].talks) + "</p>";
-      this.seen = 1;
+      element = document.getElementById("talk");
+      element.innerHTML = "<p>" + String(this.vehicles[id].talks) + "</p>";
+
+      const cases = await CallApi(
+        urlBase + "/case/count/" + this.vehicles[id].id,
+        "GET",
+        null
+      );
+      const timeAvg = await CallApi(
+        urlBase + "/case/avg_time/" + this.vehicles[id].id,
+        "GET",
+        null
+      );
+
+      if (cases.length > 0 && timeAvg.length > 0) {
+        console.log(cases, timeAvg);
+        element = document.getElementById("cases");
+        element.innerHTML = "<p>" + String(cases[0].cases) + " casos</p>";
+        element = document.getElementById("timeAvg");
+        element.innerHTML =
+          "<p>" + String(timeAvg[0].avg_time.toFixed(2)) + " horas</p>";
+      } else {
+        alert("Vehículo no tiene casos asignados.");
+      }
+
       this.center = {
         lat: this.vehicles[id].latitude,
         lng: this.vehicles[id].longitude,
