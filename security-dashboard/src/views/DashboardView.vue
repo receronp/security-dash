@@ -3,7 +3,7 @@
     <h3>Unidades Activas</h3>
 
     <div class="row">
-      <div class="column3">
+      <div class="col vehicle-list">
         <div class="cardn">
           <img src="../assets/toDoList.svg" width="50px" height="50px" />
           VAR_CASOS
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="column3">
+      <div class="col vehicle-list">
         <div class="cardn">
           <img src="../assets/reloj.svg" width="50px" height="50px" />
           VAR_CASOS
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="column3">
+      <div class="col vehicle-list">
         <div class="cardn">
           <img src="../assets/graph.svg" width="50px" height="50px" />
           VAR_CASOS
@@ -29,7 +29,7 @@
     </div>
 
     <div class="row">
-      <div class="column2" v-if="vehicles">
+      <div class="col-4" v-if="vehicles">
         <div class="row" v-for="(vehicle, index) in vehicles" :key="vehicle.id">
           <div @click="show(index)" class="card">
             <b>Unidad {{ vehicle.id }}</b
@@ -40,12 +40,8 @@
         </div>
       </div>
       <!--AQUI SE CAMBIA LOS MAPAS-->
-      <div class="column2">
-        <GMapMap
-          :center="center"
-          :zoom="11"
-          style="width: 640px; height: 460px"
-        >
+      <div class="col-8">
+        <GMapMap :center="center" :zoom="11" style="height: 28rem">
           <GMapCluster>
             <GMapMarker
               :key="index"
@@ -59,7 +55,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="column2">
+      <div class="col">
         <div class="cardn">
           <img src="../assets/dashboard.svg" width="50px" height="50px" />
           <br />
@@ -70,7 +66,7 @@
         </div>
       </div>
 
-      <div class="column2">
+      <div class="col">
         <div class="cardn">
           <img src="../assets/conference.svg" width="50px" height="50px" />
           <div id="talk" class="container">
@@ -129,24 +125,8 @@ export default {
 }
 
 /* Float four columns side by side */
-.column3 {
-  float: left;
-  width: 33%;
+.vehicle-list {
   padding: 10px 10px;
-}
-
-.column2 {
-  float: left;
-  width: 40%;
-  padding: 10px 10px;
-  justify-content: center;
-  align-content: center;
-}
-
-/* Remove extra left and right margins, due to padding */
-.row {
-  margin: 0 -5px;
-  padding: 5px;
 }
 
 /* Clear floats after the columns */
@@ -154,15 +134,6 @@ export default {
   content: "";
   display: table;
   clear: both;
-}
-
-/* Responsive columns */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
 }
 
 /* Style the counter cards */
@@ -194,9 +165,5 @@ export default {
   padding: 16px;
   text-align: center;
   background-color: #cddffd;
-}
-
-.container {
-  padding: 2px 16px;
 }
 </style>
