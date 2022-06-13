@@ -15,10 +15,14 @@ const CallApi = async (url, method, data) => {
     const response = await fetch(url, header);
     return await response.json();
   } catch (error) {
-    alert("Hubo un error favor de contactar al admnistrador.");
+    alert("There was an error, please contact your administrator.");
   }
 };
 
+// const urlBase = "http://52.14.206.240:5000";
+const urlBase = "http://localhost:5000";
+
 module.exports = {
   CallApi: CallApi,
+  urlBase: urlBase,
 };

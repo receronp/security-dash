@@ -11,7 +11,7 @@
           type="text"
           class="form-control"
           placeholder="User Name"
-          v-model="user.userName"
+          v-model="user.username"
         />
       </div>
       <div class="col-sm-3"></div>
@@ -45,15 +45,14 @@
 </template>
 
 <script>
-import { CallApi } from "@/utils";
+import { CallApi, urlBase } from "@/utils";
 
 export default {
   name: "LoginView",
   data() {
     return {
-      urlBase: "http://52.14.206.240:5000",
       user: {
-        userName: "",
+        username: "",
         password: "",
       },
     };
@@ -61,17 +60,17 @@ export default {
   methods: {
     async login() {
       var data = {
-        userName: this.user.userName,
+        username: this.user.username,
         password: this.user.password,
       };
 
-      const result = await CallApi(this.urlBase + "/user", "POST", data);
+      const result = await CallApi(urlBase + "/user/login", "POST", data);
       if (result.length > 0) {
         sessionStorage.setItem("sessionData", JSON.stringify(result[0]));
         window.location.href = "index.html";
       } else {
         alert("Usuario o contraseña invalidos");
-        this.user.userName = "";
+        this.user.username = "";
         this.user.password = "";
       }
     },
