@@ -6,7 +6,12 @@
       </div>
       <div class="col-2">
         <button
-          @click="() => TogglePopup('addVehicleTrigger')"
+          @click="
+            () => {
+              TogglePopup('addVehicleTrigger');
+              clearVehicleData();
+            }
+          "
           type="button"
           class="btn btn-success"
         >
@@ -211,17 +216,17 @@
     </div>
 
     <div class="row">
-      <div class="col-4" v-if="vehicles">
+      <div class="col-4 overflow-auto" style="height: 28rem" v-if="vehicles">
         <div class="row" v-for="(vehicle, index) in vehicles" :key="vehicle.id">
           <div @click="show(index)" class="card">
             <div class="row">
-              <div class="col-9">
+              <div class="col-8">
                 <b>Unidad {{ vehicle.id }}</b
                 ><br />
                 {{ vehicle.location }}<br />
                 {{ vehicle.description }}
               </div>
-              <div class="col-3">
+              <div class="col-4">
                 <button
                   type="button"
                   class="btn btn-danger btn-sm"
@@ -317,6 +322,17 @@ export default {
   methods: {
     setVehicleData(data) {
       this.vehicle = data;
+    },
+    clearVehicleData() {
+      this.vehicle = {
+        id: "",
+        location: "",
+        description: "",
+        latitude: "",
+        longitude: "",
+        talks: "",
+        commute: "",
+      };
     },
     async show(index) {
       var element;
