@@ -102,21 +102,25 @@ export default {
         password: this.user.password,
       };
 
-      const result = await CallApi(urlBase + "/user/register", "POST", data);
-      if (result !== null) {
-        // Admin keeps his session active.
-        // sessionStorage.setItem("sessionData", JSON.stringify(data));
-        window.location.href = "index.html";
-      } else {
-        if (data.profile.length == 0 || data.profile == null) {
-          alert("Invalid role selection.");
+      if (data.name && data.username && data.password && data.profile) {
+        const result = await CallApi(urlBase + "/user/register", "POST", data);
+        if (result !== null) {
+          // Admin keeps his session active.
+          // sessionStorage.setItem("sessionData", JSON.stringify(data));
+          window.location.href = "index.html";
         } else {
-          alert("Registration data could not be processed.");
+          if (data.profile.length == 0 || data.profile == null) {
+            alert("Invalid role selection.");
+          } else {
+            alert("Datos de registro no pudieron ser procesados.");
+          }
+          this.user.profile = "";
+          this.user.name = "";
+          this.user.username = "";
+          this.user.password = "";
         }
-        this.user.profile = "";
-        this.user.name = "";
-        this.user.username = "";
-        this.user.password = "";
+      } else {
+        alert("Datos de registro incompletos.");
       }
     },
   },
