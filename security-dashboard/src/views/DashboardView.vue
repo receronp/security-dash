@@ -1,6 +1,170 @@
 <template>
   <div class="mt-3">
-    <h3>Unidades Activas</h3>
+    <div class="row">
+      <div class="col-10">
+        <h3>Unidades Activas</h3>
+      </div>
+      <div class="col-2">
+        <button
+          @click="() => TogglePopup('addVehicleTrigger')"
+          type="button"
+          class="btn btn-success"
+        >
+          Agregar Unidad
+        </button>
+      </div>
+    </div>
+
+    <PopupComponent
+      v-if="popupTriggers.addVehicleTrigger"
+      :TogglePopup="() => TogglePopup('addVehicleTrigger')"
+    >
+      <h2>Agregar Unidad</h2>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ubicación"
+            v-model="vehicle.location"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Descripción"
+            v-model="vehicle.description"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Latitud"
+            v-model="vehicle.latitude"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Longitud"
+            v-model="vehicle.longitude"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Conferencias"
+            v-model="vehicle.talks"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Distancia Recorrida"
+            v-model="vehicle.commute"
+          />
+        </div>
+      </div>
+      <div class="row mt-2 mb-2">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-center">
+          <button class="btn btn-success" @click="addVehicle()">
+            Registrar Unidad
+          </button>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </PopupComponent>
+    <PopupComponent
+      v-if="popupTriggers.updateVehicleTrigger"
+      :TogglePopup="() => TogglePopup('updateVehicleTrigger')"
+    >
+      <h2>Actualizar Unidad</h2>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ubicación"
+            v-model="vehicle.location"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Descripción"
+            v-model="vehicle.description"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Latitud"
+            v-model="vehicle.latitude"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Longitud"
+            v-model="vehicle.longitude"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Conferencias"
+            v-model="vehicle.talks"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Distancia Recorrida"
+            v-model="vehicle.commute"
+          />
+        </div>
+      </div>
+      <div class="row mt-2 mb-2">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-center">
+          <button class="btn btn-success" @click="updateVehicle()">
+            Actualizar Unidad
+          </button>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </PopupComponent>
 
     <div class="row">
       <div class="col vehicle-list">
@@ -50,10 +214,39 @@
       <div class="col-4" v-if="vehicles">
         <div class="row" v-for="(vehicle, index) in vehicles" :key="vehicle.id">
           <div @click="show(index)" class="card">
-            <b>Unidad {{ vehicle.id }}</b
-            ><br />
-            {{ vehicle.location }}<br />
-            {{ vehicle.description }}
+            <div class="row">
+              <div class="col-9">
+                <b>Unidad {{ vehicle.id }}</b
+                ><br />
+                {{ vehicle.location }}<br />
+                {{ vehicle.description }}
+              </div>
+              <div class="col-3">
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  @click="() => deleteVehicle(vehicle.id)"
+                  style="width: 100%"
+                >
+                  Eliminar
+                </button>
+                <br />
+                <br />
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  @click="
+                    () => {
+                      TogglePopup('updateVehicleTrigger');
+                      setVehicleData(vehicle);
+                    }
+                  "
+                  style="width: 100%"
+                >
+                  Actualizar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -82,52 +275,120 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { CallApi, urlBase } from "@/utils";
+import PopupComponent from "@/components/PopupComponent.vue";
 
 export default {
   props: ["role"],
+  components: { PopupComponent },
   data() {
     return {
+      vehicle: {
+        id: "",
+        location: "",
+        description: "",
+        latitude: "",
+        longitude: "",
+        talks: "",
+        commute: "",
+      },
       vehicles: null,
       markers: null,
       center: { lat: 25.706583, lng: -100.304304 },
     };
   },
+  setup() {
+    const popupTriggers = ref({
+      addVehicleTrigger: false,
+      updateVehicleTrigger: false,
+    });
+
+    const TogglePopup = (trigger) => {
+      popupTriggers.value[trigger] = !popupTriggers.value[trigger];
+    };
+
+    return {
+      PopupComponent,
+      popupTriggers,
+      TogglePopup,
+    };
+  },
   methods: {
-    async show(id) {
+    setVehicleData(data) {
+      this.vehicle = data;
+    },
+    async show(index) {
       var element;
-      console.log(this.vehicles[id]);
       element = document.getElementById("commute");
-      element.innerHTML = "<p>" + String(this.vehicles[id].commute) + " km</p>";
+      element.innerHTML =
+        "<p>" + String(this.vehicles[index].commute) + " km</p>";
       element = document.getElementById("talk");
-      element.innerHTML = "<p>" + String(this.vehicles[id].talks) + "</p>";
+      element.innerHTML = "<p>" + String(this.vehicles[index].talks) + "</p>";
 
       const cases = await CallApi(
-        urlBase + "/case/count/" + this.vehicles[id].id,
-        "GET",
-        null
-      );
-      const timeAvg = await CallApi(
-        urlBase + "/case/avg_time/" + this.vehicles[id].id,
+        urlBase + "/case/count/" + this.vehicles[index].id,
         "GET",
         null
       );
 
-      if (cases.length > 0 && timeAvg.length > 0) {
-        console.log(cases, timeAvg);
+      if (cases.length > 0 && cases[0].cases !== null) {
         element = document.getElementById("cases");
         element.innerHTML = "<p>" + String(cases[0].cases) + " casos</p>";
-        element = document.getElementById("timeAvg");
+      }
+
+      const timeAvg = await CallApi(
+        urlBase + "/case/avg_time/" + this.vehicles[index].id,
+        "GET",
+        null
+      );
+
+      element = document.getElementById("timeAvg");
+      if (timeAvg.length > 0 && timeAvg[0].avg_time !== null) {
         element.innerHTML =
           "<p>" + String(timeAvg[0].avg_time.toFixed(2)) + " horas</p>";
       } else {
-        alert("Vehículo no tiene casos asignados.");
+        element.innerHTML = "<p>N/A</p>";
       }
 
       this.center = {
-        lat: this.vehicles[id].latitude,
-        lng: this.vehicles[id].longitude,
+        lat: this.vehicles[index].latitude,
+        lng: this.vehicles[index].longitude,
       };
+    },
+    async addVehicle() {
+      const result = await CallApi(urlBase + "/vehicle", "POST", this.vehicle);
+      if (result !== null > 0) {
+        alert("Unidad agregada a base de datos.");
+      } else {
+        alert(
+          "No se pudo agregar la unidad, verifique los datos e intente de nuevo."
+        );
+      }
+      window.location.href = "dashboard";
+    },
+    async updateVehicle() {
+      const result = await CallApi(urlBase + "/vehicle", "PUT", this.vehicle);
+      if (result !== null > 0) {
+        alert("Unidad actualizada en base de datos.");
+      } else {
+        alert(
+          "No se pudo actualizar la unidad, verifique los datos e intente de nuevo."
+        );
+      }
+      window.location.href = "dashboard";
+    },
+    async deleteVehicle(id) {
+      const result = await CallApi(urlBase + "/vehicle/" + id, "DELETE", null);
+      if (result !== null > 0) {
+        console.log(result);
+        alert("Unidad eliminada de base de datos.");
+      } else {
+        alert(
+          "No se pudo eliminar la unidad, verifique los datos e intente de nuevo."
+        );
+      }
+      window.location.href = "dashboard";
     },
   },
 
@@ -140,7 +401,7 @@ export default {
         sessionStorage.setItem("vehicleData", JSON.stringify(result));
         this.vehicles = result;
       } else {
-        alert("No se encontraron vehiculos");
+        alert("No se encontraron unidades");
       }
     }
   },
