@@ -12,6 +12,9 @@
             to="/dashboard"
             >Dashboard</router-link
           >
+          <router-link v-if="username" class="nav-item nav-link" to="/reports"
+            >Reports</router-link
+          >
           <router-link v-if="!username" class="nav-item nav-link" to="/login"
             >Login</router-link
           >

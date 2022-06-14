@@ -1,4 +1,5 @@
 import DashboardViewVue from "@/views/DashboardView.vue";
+import ReportViewVue from "@/views/ReportView.vue";
 import HomeViewVue from "@/views/HomeView.vue";
 import LoginViewVue from "@/views/LoginView.vue";
 import RegisterViewVue from "@/views/RegisterView.vue";
@@ -25,6 +26,11 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: DashboardViewVue,
+  },
+  {
+    path: "/reports",
+    name: "reports",
+    component: ReportViewVue,
   },
   {
     path: "/logout",

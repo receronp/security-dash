@@ -20,6 +20,17 @@ const getReportById = async (req, res) => {
     });
 }
 
+const getReportByVehicleId = async (req, res) => {
+    const { id } = req.params;
+    const pool = await dataConn.getConnection();
+    const sql = "select id, name, location, description, latitude, longitude, category, report_vehicle from reports where report_vehicle = " + mysql.escape(id) + " or report_vehicle is null";
+
+    pool.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        return res.json(result);
+    });
+}
+
 const createReport = async (req, res) => {
     const { name, location, description, latitude, longitude, category, report_vehicle } = req.body;
     const pool = await dataConn.getConnection();
@@ -61,5 +72,6 @@ module.exports = {
     getReportById: getReportById,
     createReport: createReport,
     deleteReport: deleteReport,
-    updateReport: updateReport
+    updateReport: updateReport,
+    getReportByVehicleId: getReportByVehicleId,
 }

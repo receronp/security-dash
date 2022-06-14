@@ -1,7 +1,12 @@
 <template>
   <div>
     <NavigationComponent :username="username" :role="role" />
-    <router-view class="container" :username="username" :role="role" />
+    <router-view
+      class="container"
+      :username="username"
+      :role="role"
+      :user_vehicle="user_vehicle"
+    />
   </div>
 </template>
 
@@ -17,6 +22,7 @@ export default {
     return {
       username: "",
       role: "",
+      user_vehicle: "",
     };
   },
   methods: {
@@ -26,6 +32,7 @@ export default {
         const objSessionData = JSON.parse(sessionData);
         this.username = objSessionData.username;
         this.role = objSessionData.profile;
+        this.user_vehicle = objSessionData.user_vehicle;
       }
     },
   },
