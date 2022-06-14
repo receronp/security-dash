@@ -264,13 +264,22 @@
               v-for="(vehicle, index) in vehicles"
               :position="{ lat: vehicle.latitude, lng: vehicle.longitude }"
               :icon="{
-                // url: 'https://img.icons8.com/fluency-systems-filled/344/policeman-male.png', // More icons at https://icons8.com/icons/set/map-marker-police
-                url: 'https://img.icons8.com/external-creatype-filed-outline-colourcreatype/344/external-car-crime-and-law-creatype-filed-outline-colourcreatype.png', // More icons at https://icons8.com/icons/set/patrol
+                url: 'https://img.icons8.com/external-creatype-filed-outline-colourcreatype/344/external-car-crime-and-law-creatype-filed-outline-colourcreatype.png',
                 scaledSize: { width: 44, height: 44 },
                 labelOrigin: { x: 16, y: -10 },
               }"
               :clickable="true"
-              :draggable="true"
+            />
+            <GMapMarker
+              :key="index"
+              v-for="(report, index) in reports"
+              :position="{ lat: report.latitude, lng: report.longitude }"
+              :icon="{
+                url: 'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-911-emergency-service-flaticons-lineal-color-flat-icons.png',
+                scaledSize: { width: 33, height: 33 },
+                labelOrigin: { x: 16, y: -10 },
+              }"
+              :clickable="true"
             />
           </GMapCluster>
         </GMapMap>
@@ -298,8 +307,8 @@ export default {
         talks: "",
         commute: "",
       },
+      reports: null,
       vehicles: null,
-      markers: null,
       center: { lat: 25.706583, lng: -100.304304 },
     };
   },
@@ -412,12 +421,18 @@ export default {
     if (this.role !== "admin") {
       window.location.href = "index.html";
     } else {
-      const result = await CallApi(urlBase + "/vehicle", "GET", null);
+      var result = await CallApi(urlBase + "/vehicle", "GET", null);
       if (result.length > 0) {
-        sessionStorage.setItem("vehicleData", JSON.stringify(result));
         this.vehicles = result;
       } else {
         alert("No se encontraron unidades");
+      }
+
+      result = await CallApi(urlBase + "/report", "GET", null);
+      if (result.length > 0) {
+        this.reports = result;
+      } else {
+        alert("No se encontraron reportes");
       }
     }
   },
