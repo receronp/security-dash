@@ -65,6 +65,12 @@
               :key="index"
               v-for="(vehicle, index) in vehicles"
               :position="{ lat: vehicle.latitude, lng: vehicle.longitude }"
+              :icon="{
+                // url: 'https://img.icons8.com/fluency-systems-filled/344/policeman-male.png', // More icons at https://icons8.com/icons/set/map-marker-police
+                url: 'https://img.icons8.com/external-creatype-filed-outline-colourcreatype/344/external-car-crime-and-law-creatype-filed-outline-colourcreatype.png', // More icons at https://icons8.com/icons/set/patrol
+                scaledSize: { width: 44, height: 44 },
+                labelOrigin: { x: 16, y: -10 },
+              }"
               :clickable="true"
               :draggable="true"
             />
