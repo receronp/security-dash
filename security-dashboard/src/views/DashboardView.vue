@@ -383,37 +383,36 @@ export default {
     },
     async addVehicle() {
       const result = await CallApi(urlBase + "/vehicle", "POST", this.vehicle);
-      if (result !== null) {
+      if (result.length > 0) {
         alert("Unidad agregada a base de datos.");
+        window.location.href = "dashboard";
       } else {
         alert(
           "No se pudo agregar la unidad, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "dashboard";
     },
     async updateVehicle() {
       const result = await CallApi(urlBase + "/vehicle", "PUT", this.vehicle);
-      if (result !== null) {
+      if (result.length > 0) {
         alert("Unidad actualizada en base de datos.");
+        window.location.href = "dashboard";
       } else {
         alert(
           "No se pudo actualizar la unidad, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "dashboard";
     },
     async deleteVehicle(id) {
       const result = await CallApi(urlBase + "/vehicle/" + id, "DELETE", null);
-      if (result !== null) {
-        console.log(result);
+      if (result.length > 0) {
         alert("Unidad eliminada de base de datos.");
+        window.location.href = "dashboard";
       } else {
         alert(
           "No se pudo eliminar la unidad, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "dashboard";
     },
   },
 

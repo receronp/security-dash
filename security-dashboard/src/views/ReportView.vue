@@ -387,36 +387,36 @@ export default {
     },
     async addCase() {
       const result = await CallApi(urlBase + "/case", "POST", this.case_data);
-      if (result !== null) {
-        alert("Reporte agregada a base de datos.");
+      if (result.length > 0) {
+        alert("Caso agregado a base de datos.");
+        window.location.href = "reports";
       } else {
         alert(
-          "No se pudo agregar el reporte, verifique los datos e intente de nuevo."
+          "No se pudo agregar el caso, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "reports";
     },
     async addReport() {
       const result = await CallApi(urlBase + "/report", "POST", this.report);
-      if (result !== null) {
-        alert("Reporte agregada a base de datos.");
+      if (result.length > 0) {
+        alert("Reporte agregado a base de datos.");
+        window.location.href = "reports";
       } else {
         alert(
           "No se pudo agregar el reporte, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "reports";
     },
     async updateReport() {
       const result = await CallApi(urlBase + "/report", "PUT", this.report);
-      if (result !== null) {
+      if (result.length > 0) {
         alert("Reporte actualizado en base de datos.");
+        window.location.href = "reports";
       } else {
         alert(
           "No se pudo actualizar el reporte, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "reports";
     },
     async deleteReport(report) {
       const result = await CallApi(
@@ -424,8 +424,7 @@ export default {
         "DELETE",
         null
       );
-      if (result !== null) {
-        console.log(result);
+      if (result.length > 0) {
         alert("Reporte eliminado de base de datos.");
         this.setCaseData(report.report_vehicle);
         this.TogglePopup("deleteReportTrigger");

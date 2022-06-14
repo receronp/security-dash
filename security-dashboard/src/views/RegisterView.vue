@@ -104,7 +104,7 @@ export default {
 
       if (data.name && data.username && data.password && data.profile) {
         const result = await CallApi(urlBase + "/user/register", "POST", data);
-        if (result !== null) {
+        if (result.length > 0) {
           // Admin keeps his session active.
           // sessionStorage.setItem("sessionData", JSON.stringify(data));
           window.location.href = "index.html";
