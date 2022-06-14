@@ -20,6 +20,16 @@ const getReportById = async (req, res) => {
     });
 }
 
+const getReportUnassigned = async (req, res) => {
+    const pool = await dataConn.getConnection();
+    const sql = "select id, name, location, description, latitude, longitude, category, report_vehicle from reports where report_vehicle is null";
+
+    pool.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        return res.json(result);
+    });
+}
+
 const getReportByVehicleId = async (req, res) => {
     const { id } = req.params;
     const pool = await dataConn.getConnection();
@@ -74,4 +84,5 @@ module.exports = {
     deleteReport: deleteReport,
     updateReport: updateReport,
     getReportByVehicleId: getReportByVehicleId,
+    getReportUnassigned: getReportUnassigned,
 }

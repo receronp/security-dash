@@ -405,6 +405,17 @@ export default {
           } else {
             alert("No se encontraron reportes");
           }
+        } else {
+          result = await CallApi(
+            urlBase + "/report/unassigned/list",
+            "GET",
+            null
+          );
+          if (result.length > 0) {
+            this.reports = result;
+          } else {
+            alert("No se encontraron reportes");
+          }
         }
       }
     }
