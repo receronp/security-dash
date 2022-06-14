@@ -383,7 +383,7 @@ export default {
     },
     async addVehicle() {
       const result = await CallApi(urlBase + "/vehicle", "POST", this.vehicle);
-      if (result !== null > 0) {
+      if (result !== null) {
         alert("Unidad agregada a base de datos.");
       } else {
         alert(
@@ -394,7 +394,7 @@ export default {
     },
     async updateVehicle() {
       const result = await CallApi(urlBase + "/vehicle", "PUT", this.vehicle);
-      if (result !== null > 0) {
+      if (result !== null) {
         alert("Unidad actualizada en base de datos.");
       } else {
         alert(
@@ -405,7 +405,7 @@ export default {
     },
     async deleteVehicle(id) {
       const result = await CallApi(urlBase + "/vehicle/" + id, "DELETE", null);
-      if (result !== null > 0) {
+      if (result !== null) {
         console.log(result);
         alert("Unidad eliminada de base de datos.");
       } else {

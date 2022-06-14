@@ -330,7 +330,7 @@ export default {
     },
     async addReport() {
       const result = await CallApi(urlBase + "/report", "POST", this.report);
-      if (result !== null > 0) {
+      if (result !== null) {
         alert("Reporte agregada a base de datos.");
       } else {
         alert(
@@ -341,7 +341,7 @@ export default {
     },
     async updateReport() {
       const result = await CallApi(urlBase + "/report", "PUT", this.report);
-      if (result !== null > 0) {
+      if (result !== null) {
         alert("Reporte actualizado en base de datos.");
       } else {
         alert(
@@ -352,7 +352,7 @@ export default {
     },
     async deleteReport(id) {
       const result = await CallApi(urlBase + "/report/" + id, "DELETE", null);
-      if (result !== null > 0) {
+      if (result !== null) {
         console.log(result);
         alert("Reporte eliminado de base de datos.");
       } else {
