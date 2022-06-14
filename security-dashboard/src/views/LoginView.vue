@@ -1,52 +1,50 @@
 <template>
-
-
-  
   <div class="mt-3">
-    
     <body class="text-center">
-      <img src= "../assets/Dash.png" alt width="100" height="100"/>
-    <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
-    <div class="row">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-2">
-        <label class="form-label text-end">Usuario:</label>
+      <img src="../assets/Dash.png" alt width="100" height="100" />
+      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-2">
+          <label class="form-label text-end">Usuario:</label>
+        </div>
+        <div class="col-sm-4 text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Usuario"
+            v-model="user.username"
+          />
+        </div>
+        <div class="col-sm-3"></div>
       </div>
-      <div class="col-sm-4 text-start">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Usuario"
-          v-model="user.username"
-        />
+      <br />
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-2">
+          <label class="form-label text-end">Contraseña:</label>
+        </div>
+        <div class="col-sm-4 text-start">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Contraseña"
+            v-model="user.password"
+            @keyup.enter="login()"
+          />
+        </div>
+        <div class="col-sm-3"></div>
       </div>
-      <div class="col-sm-3"></div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-2">
-        <label class="form-label text-end">Contraseña:</label>
+      <br />
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-center">
+          <button class="btn btn-primary" @click="login()">
+            Login
+          </button>
+        </div>
+        <div class="col-sm-3"></div>
       </div>
-      <div class="col-sm-4 text-start">
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Contraseña"
-          v-model="user.password"
-          @keyup.enter="login()"
-        />
-      </div>
-      <div class="col-sm-3"></div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-6 text-center">
-        <button class="btn btn-outline-primary" @click="login()">Iniciar Sesión</button>
-      </div>
-      <div class="col-sm-3"></div>
-    </div>
     </body>
   </div>
 </template>

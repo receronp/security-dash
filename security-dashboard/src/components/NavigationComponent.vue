@@ -13,16 +13,16 @@
             >Dashboard</router-link
           >
           <router-link v-if="username" class="nav-item nav-link" to="/reports"
-            >Reports</router-link
-          >
-          <router-link v-if="!username" class="nav-item nav-link" to="/login"
-            >Login</router-link
+            >Reportes</router-link
           >
           <router-link
             v-if="role == 'admin'"
             class="nav-item nav-link"
             to="/register"
-            >Register User</router-link
+            >Registrar Usuario</router-link
+          >
+          <router-link v-if="!username" class="nav-item nav-link" to="/login"
+            >Login</router-link
           >
           <router-link v-if="username" class="nav-item nav-link" to="/logout"
             >Logout</router-link
