@@ -191,6 +191,50 @@
         <div class="col-sm-3"></div>
       </div>
     </PopupComponent>
+    <PopupComponent
+      v-if="popupTriggers.deleteReportTrigger"
+      :TogglePopup="() => TogglePopup('deleteReportTrigger')"
+    >
+      <h2>Agregar Caso</h2>
+      <div class="row mt-2">
+        <div class="col-4"></div>
+        <div class="col-4 text-center">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              checked
+              v-model="case_data.success"
+            />
+            <label class="form-check-label" for="flexSwitchCheckChecked"
+              >Exitoso</label
+            >
+          </div>
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Tiempo de respuesta (hrs)"
+            v-model="case_data.response_time"
+          />
+        </div>
+      </div>
+      <div class="row mt-2 mb-2">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-center">
+          <button class="btn btn-success" @click="addCase()">
+            Agregar Caso
+          </button>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </PopupComponent>
 
     <div class="row mt-2">
       <div class="col-4 overflow-auto" style="height: 32rem" v-if="reports">
@@ -207,8 +251,8 @@
                 <button
                   type="button"
                   class="btn btn-danger btn-sm"
-                  v-if="role == 'admin'"
-                  @click="() => deleteReport(report.id)"
+                  v-if="role == 'admin' && report.report_vehicle"
+                  @click="() => deleteReport(report)"
                   style="width: 100%"
                 >
                   Eliminar
@@ -277,14 +321,20 @@ export default {
   data() {
     return {
       report: {
-        id: "",
-        name: "",
-        location: "",
-        description: "",
-        latitude: "",
-        longitude: "",
-        talks: "",
-        commute: "",
+        id: null,
+        name: null,
+        location: null,
+        description: null,
+        latitude: null,
+        longitude: null,
+        category: null,
+        report_vehicle: null,
+      },
+      case_data: {
+        case_vehicle: null,
+        success: false,
+        date: null,
+        response_time: null,
       },
       reports: null,
       vehicles: null,
@@ -295,6 +345,7 @@ export default {
     const popupTriggers = ref({
       addReportTrigger: false,
       updateReportTrigger: false,
+      deleteReportTrigger: false,
     });
 
     const TogglePopup = (trigger) => {
@@ -308,6 +359,11 @@ export default {
     };
   },
   methods: {
+    setCaseData(vehicle) {
+      this.case_data.case_vehicle = vehicle;
+      const [withoutT] = new Date().toISOString().split("T");
+      this.case_data.date = withoutT;
+    },
     setReportData(data) {
       this.report = data;
     },
@@ -327,6 +383,17 @@ export default {
         lat: this.reports[index].latitude,
         lng: this.reports[index].longitude,
       };
+    },
+    async addCase() {
+      const result = await CallApi(urlBase + "/case", "POST", this.case_data);
+      if (result !== null) {
+        alert("Reporte agregada a base de datos.");
+      } else {
+        alert(
+          "No se pudo agregar el reporte, verifique los datos e intente de nuevo."
+        );
+      }
+      window.location.href = "reports";
     },
     async addReport() {
       const result = await CallApi(urlBase + "/report", "POST", this.report);
@@ -350,17 +417,22 @@ export default {
       }
       window.location.href = "reports";
     },
-    async deleteReport(id) {
-      const result = await CallApi(urlBase + "/report/" + id, "DELETE", null);
+    async deleteReport(report) {
+      const result = await CallApi(
+        urlBase + "/report/" + report.id,
+        "DELETE",
+        null
+      );
       if (result !== null) {
         console.log(result);
         alert("Reporte eliminado de base de datos.");
+        this.setCaseData(report.report_vehicle);
+        this.TogglePopup("deleteReportTrigger");
       } else {
         alert(
           "No se pudo eliminar el reporte, verifique los datos e intente de nuevo."
         );
       }
-      window.location.href = "reports";
     },
   },
 
