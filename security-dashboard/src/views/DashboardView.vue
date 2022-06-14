@@ -299,13 +299,13 @@ export default {
   data() {
     return {
       vehicle: {
-        id: "",
-        location: "",
-        description: "",
-        latitude: "",
-        longitude: "",
-        talks: "",
-        commute: "",
+        id: null,
+        location: null,
+        description: null,
+        latitude: null,
+        longitude: null,
+        talks: null,
+        commute: null,
       },
       reports: null,
       vehicles: null,
@@ -334,13 +334,13 @@ export default {
     },
     clearVehicleData() {
       this.vehicle = {
-        id: "",
-        location: "",
-        description: "",
-        latitude: "",
-        longitude: "",
-        talks: "",
-        commute: "",
+        id: null,
+        location: null,
+        description: null,
+        latitude: null,
+        longitude: null,
+        talks: null,
+        commute: null,
       };
     },
     async show(index) {

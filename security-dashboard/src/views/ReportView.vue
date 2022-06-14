@@ -369,13 +369,14 @@ export default {
     },
     clearReportData() {
       this.report = {
-        id: "",
-        location: "",
-        description: "",
-        latitude: "",
-        longitude: "",
-        talks: "",
-        commute: "",
+        id: null,
+        name: null,
+        location: null,
+        description: null,
+        latitude: null,
+        longitude: null,
+        category: null,
+        report_vehicle: null,
       };
     },
     async show(index) {
