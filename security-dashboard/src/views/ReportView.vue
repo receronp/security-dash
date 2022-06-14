@@ -12,6 +12,7 @@
               clearReportData();
             }
           "
+          v-if="role == 'admin'"
           type="button"
           class="btn btn-success"
         >
@@ -206,6 +207,7 @@
                 <button
                   type="button"
                   class="btn btn-danger btn-sm"
+                  v-if="role == 'admin'"
                   @click="() => deleteReport(report.id)"
                   style="width: 100%"
                 >
