@@ -1,26 +1,29 @@
 <template>
   <div class="mt-3">
     <div v-if="username" class="text-secondary text-center">
-      Welcome back
+      Bienvenido de nuevo
       <span class="font-weight-bold text-info">{{ username }}</span>
     </div>
     <div class="container text-center">
       <div class="row justify-content-center">
         <div class="col-10 col-md-10 col-lg-8 col-xl-7">
-          <h4 class="display-4 text-primary mb-2">Security Dashboard</h4>
-          <p class="lead">
-            This simple app implements a security dashboard were admins can have
-            a general overview of the location of enterprise vehicles, and
-            drivers can track their own progress and be directed to end users.
+           <img src= "../assets/Dash.png" alt width="300" height="300"/>
+          <h4 class="display-6 text-primary mb-2">Security Dashboard</h4>
+          <p class="h6">
+            Esta aplicación implementa un panel de seguridad donde los
+            administradores pueden tener una visión general de la ubicación de
+            los vehículos de la empresa, y los conductores pueden realizar un
+            seguimiento de su propio progreso y dirigirse a los usuarios
+            finales.
           </p>
           <router-link v-if="!username" class="btn btn-primary me-2" to="/login"
-            >Log In</router-link
+            >Iniciar sesión</router-link
           >
           <router-link
             v-if="role == 'admin'"
             class="btn btn-primary me-2"
             to="/register"
-            >Register User</router-link
+            >Registrar Usuario</router-link
           >
           <router-link
             v-if="role == 'admin'"
@@ -29,7 +32,7 @@
             >Dashboard</router-link
           >
           <router-link v-if="username" class="btn btn-primary" to="/logout"
-            >Log Out</router-link
+            >Salir</router-link
           >
         </div>
       </div>
