@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "0c9ff75d-a41a-481e-981f-962939cb5b6b",
+		"name": "Security Dash",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19197495"
+	},
+	"item": [
+		{
+			"name": "Case",
+			"item": [
+				{
+					"name": "Case",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/case",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Case ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/case/1",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"case",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Case",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"case_vehicle\" : 1,\r\n    \"success\" : 0,\r\n    \"date\" : \"2022-04-01\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/case",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Case",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 9,\r\n    \"case_vehicle\" : 1,\r\n    \"success\" : 0,\r\n    \"date\" : \"2022-05-01\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/case",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Case",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/case/8",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"case",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/report",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/report/1",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"report",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Robo a mano armada\",\r\n    \"location\" : \"test\",\r\n    \"description\" : \"test\",\r\n    \"latitude\" : 123.14,\r\n    \"longitude\" : 123.14,\r\n    \"category\" : \"Arma de Fuego\",\r\n    \"report_vehicle\" : 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/report",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 4,\r\n    \"name\" : \"Robo vehicular\",\r\n    \"location\" : \"test\",\r\n    \"description\" : \"test\",\r\n    \"latitude\" : 123.14,\r\n    \"longitude\" : 123.14,\r\n    \"category\" : \"Arma de Fuego\",\r\n    \"report_vehicle\" : 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/report",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/report/4",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"report",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/vehicle",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/vehicle/1",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"vehicle",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location\" : \"test\",\r\n    \"description\" : \"test\",\r\n    \"latitude\" : 123.14,\r\n    \"longitude\" : 123.14,\r\n    \"avg_health_hours\" : 4,\r\n    \"improvement\" : 5.7,\r\n    \"talks\" : 2,\r\n    \"commute\"  : 84\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/vehicle",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/vehicle/5",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"vehicle",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 7,\r\n    \"location\" : \"test\",\r\n    \"description\" : \"test\",\r\n    \"latitude\" : 123.14,\r\n    \"longitude\" : 123.14,\r\n    \"avg_health_hours\" : 4,\r\n    \"improvement\" : 5.7,\r\n    \"talks\" : 2,\r\n    \"commute\"  : 32\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/vehicle",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/user",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "$server",
+			"value": "http://52.14.206.240:5000",
+			"type": "string"
+		},
+		{
+			"key": "$remote",
+			"value": "http://52.14.206.240:5000",
+			"type": "string"
+		},
+		{
+			"key": "$local",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

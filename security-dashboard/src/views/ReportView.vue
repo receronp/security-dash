@@ -2,36 +2,47 @@
   <div class="mt-3">
     <div class="row">
       <div class="col-10">
-        <h3>Unidades Activas</h3>
+        <h3>Reportes Activos</h3>
       </div>
       <div class="col-2">
         <button
           @click="
             () => {
-              TogglePopup('addVehicleTrigger');
-              clearVehicleData();
+              TogglePopup('addReportTrigger');
+              clearReportData();
             }
           "
+          v-if="role == 'admin'"
           type="button"
           class="btn btn-success"
         >
-          Agregar Unidad
+          Agregar Reporte
         </button>
       </div>
     </div>
 
     <PopupComponent
-      v-if="popupTriggers.addVehicleTrigger"
-      :TogglePopup="() => TogglePopup('addVehicleTrigger')"
+      v-if="popupTriggers.addReportTrigger"
+      :TogglePopup="() => TogglePopup('addReportTrigger')"
     >
-      <h2>Agregar Unidad</h2>
+      <h2>Agregar Reporte</h2>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Tema"
+            v-model="report.name"
+          />
+        </div>
+      </div>
       <div class="row mt-2">
         <div class="col text-start">
           <input
             type="text"
             class="form-control"
             placeholder="Ubicación"
-            v-model="vehicle.location"
+            v-model="report.location"
           />
         </div>
       </div>
@@ -41,7 +52,7 @@
             type="text"
             class="form-control"
             placeholder="Descripción"
-            v-model="vehicle.description"
+            v-model="report.description"
           />
         </div>
       </div>
@@ -51,7 +62,7 @@
             type="text"
             class="form-control"
             placeholder="Latitud"
-            v-model="vehicle.latitude"
+            v-model="report.latitude"
           />
         </div>
       </div>
@@ -61,7 +72,7 @@
             type="text"
             class="form-control"
             placeholder="Longitud"
-            v-model="vehicle.longitude"
+            v-model="report.longitude"
           />
         </div>
       </div>
@@ -70,8 +81,8 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Conferencias"
-            v-model="vehicle.talks"
+            placeholder="Categoría"
+            v-model="report.category"
           />
         </div>
       </div>
@@ -80,33 +91,43 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Distancia Recorrida"
-            v-model="vehicle.commute"
+            placeholder="Unidad Asignada"
+            v-model="report.report_vehicle"
           />
         </div>
       </div>
       <div class="row mt-2 mb-2">
         <div class="col-sm-3"></div>
         <div class="col-sm-6 text-center">
-          <button class="btn btn-success" @click="addVehicle()">
-            Registrar Unidad
+          <button class="btn btn-success" @click="addReport()">
+            Registrar Reporte
           </button>
         </div>
         <div class="col-sm-3"></div>
       </div>
     </PopupComponent>
     <PopupComponent
-      v-if="popupTriggers.updateVehicleTrigger"
-      :TogglePopup="() => TogglePopup('updateVehicleTrigger')"
+      v-if="popupTriggers.updateReportTrigger"
+      :TogglePopup="() => TogglePopup('updateReportTrigger')"
     >
-      <h2>Actualizar Unidad</h2>
+      <h2>Actualizar Reporte</h2>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Tema"
+            v-model="report.name"
+          />
+        </div>
+      </div>
       <div class="row mt-2">
         <div class="col text-start">
           <input
             type="text"
             class="form-control"
             placeholder="Ubicación"
-            v-model="vehicle.location"
+            v-model="report.location"
           />
         </div>
       </div>
@@ -116,7 +137,7 @@
             type="text"
             class="form-control"
             placeholder="Descripción"
-            v-model="vehicle.description"
+            v-model="report.description"
           />
         </div>
       </div>
@@ -126,7 +147,7 @@
             type="text"
             class="form-control"
             placeholder="Latitud"
-            v-model="vehicle.latitude"
+            v-model="report.latitude"
           />
         </div>
       </div>
@@ -136,7 +157,7 @@
             type="text"
             class="form-control"
             placeholder="Longitud"
-            v-model="vehicle.longitude"
+            v-model="report.longitude"
           />
         </div>
       </div>
@@ -145,8 +166,8 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Conferencias"
-            v-model="vehicle.talks"
+            placeholder="Categoría"
+            v-model="report.category"
           />
         </div>
       </div>
@@ -155,82 +176,83 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Distancia Recorrida"
-            v-model="vehicle.commute"
+            placeholder="Unidad Asignada"
+            v-model="report.report_vehicle"
           />
         </div>
       </div>
       <div class="row mt-2 mb-2">
         <div class="col-sm-3"></div>
         <div class="col-sm-6 text-center">
-          <button class="btn btn-success" @click="updateVehicle()">
-            Actualizar Unidad
+          <button class="btn btn-success" @click="updateReport()">
+            Actualizar Reporte
+          </button>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </PopupComponent>
+    <PopupComponent
+      v-if="popupTriggers.deleteReportTrigger"
+      :TogglePopup="() => TogglePopup('deleteReportTrigger')"
+    >
+      <h2>Agregar Caso</h2>
+      <div class="row mt-2">
+        <div class="col-4"></div>
+        <div class="col-4 text-center">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              checked
+              v-model="case_data.success"
+            />
+            <label class="form-check-label" for="flexSwitchCheckChecked"
+              >Exitoso</label
+            >
+          </div>
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-start">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Tiempo de respuesta (hrs)"
+            v-model="case_data.response_time"
+          />
+        </div>
+      </div>
+      <div class="row mt-2 mb-2">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-center">
+          <button class="btn btn-success" @click="addCase()">
+            Agregar Caso
           </button>
         </div>
         <div class="col-sm-3"></div>
       </div>
     </PopupComponent>
 
-    <div class="row">
-      <div class="col vehicle-list">
-        <div class="cardn">
-          <img src="../assets/toDoList.svg" width="50px" height="50px" />
-          <br />
-          <div id="cases" class="container">
-            <p>Escoga una unidad para desplegar los datos.</p>
-          </div>
-          <p>Casos resueltos</p>
-        </div>
-      </div>
-
-      <div class="col vehicle-list">
-        <div class="cardn">
-          <img src="../assets/reloj.svg" width="50px" height="50px" />
-          <br />
-          <div id="timeAvg" class="container">
-            <p>Escoga una unidad para desplegar los datos.</p>
-          </div>
-          <p>Tiempo promedio de respuesta</p>
-        </div>
-      </div>
-      <div class="col vehicle-list">
-        <div class="cardn">
-          <img src="../assets/dashboard.svg" width="50px" height="50px" />
-          <br />
-          <div id="commute" class="container">
-            <p>Escoga una unidad para desplegar los datos.</p>
-          </div>
-          <p>Distancia de traslado durante el día.</p>
-        </div>
-      </div>
-
-      <div class="col vehicle-list">
-        <div class="cardn">
-          <img src="../assets/conference.svg" width="50px" height="50px" />
-          <div id="talk" class="container">
-            <p>Escoga una unidad para desplegar los datos.</p>
-          </div>
-          <p>Número de capacitaciones mensuales.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-4 overflow-auto" style="height: 28rem" v-if="vehicles">
-        <div class="row" v-for="(vehicle, index) in vehicles" :key="vehicle.id">
+    <div class="row mt-2">
+      <div class="col-4 overflow-auto" style="height: 32rem" v-if="reports">
+        <div class="row" v-for="(report, index) in reports" :key="report.id">
           <div @click="show(index)" class="card">
             <div class="row">
               <div class="col-8">
-                <b>Unidad {{ vehicle.id }}</b
+                <b>Reporte {{ report.id }}</b
                 ><br />
-                {{ vehicle.location }}<br />
-                {{ vehicle.description }}
+                {{ report.location }}<br />
+                {{ report.description }}
               </div>
               <div class="col-4">
                 <button
                   type="button"
                   class="btn btn-danger btn-sm"
-                  @click="() => deleteVehicle(vehicle.id)"
+                  v-if="role == 'admin' && report.report_vehicle"
+                  @click="() => deleteReport(report)"
                   style="width: 100%"
                 >
                   Eliminar
@@ -242,8 +264,8 @@
                   class="btn btn-secondary btn-sm"
                   @click="
                     () => {
-                      TogglePopup('updateVehicleTrigger');
-                      setVehicleData(vehicle);
+                      TogglePopup('updateReportTrigger');
+                      setReportData(report);
                     }
                   "
                   style="width: 100%"
@@ -257,7 +279,7 @@
       </div>
       <!--AQUI SE CAMBIA LOS MAPAS-->
       <div class="col-8">
-        <GMapMap :center="center" :zoom="11" style="height: 28rem">
+        <GMapMap :center="center" :zoom="11" style="height: 32rem">
           <GMapCluster>
             <GMapMarker
               :key="index"
@@ -294,18 +316,25 @@ import { CallApi, urlBase } from "@/utils";
 import PopupComponent from "@/components/PopupComponent.vue";
 
 export default {
-  props: ["role"],
+  props: ["username", "role", "user_vehicle"],
   components: { PopupComponent },
   data() {
     return {
-      vehicle: {
+      report: {
         id: null,
+        name: null,
         location: null,
         description: null,
         latitude: null,
         longitude: null,
-        talks: null,
-        commute: null,
+        category: null,
+        report_vehicle: null,
+      },
+      case_data: {
+        case_vehicle: null,
+        success: false,
+        date: null,
+        response_time: null,
       },
       reports: null,
       vehicles: null,
@@ -314,8 +343,9 @@ export default {
   },
   setup() {
     const popupTriggers = ref({
-      addVehicleTrigger: false,
-      updateVehicleTrigger: false,
+      addReportTrigger: false,
+      updateReportTrigger: false,
+      deleteReportTrigger: false,
     });
 
     const TogglePopup = (trigger) => {
@@ -329,109 +359,136 @@ export default {
     };
   },
   methods: {
-    setVehicleData(data) {
-      this.vehicle = data;
+    setCaseData(vehicle) {
+      this.case_data.case_vehicle = vehicle;
+      const [withoutT] = new Date().toISOString().split("T");
+      this.case_data.date = withoutT;
     },
-    clearVehicleData() {
-      this.vehicle = {
+    setReportData(data) {
+      this.report = data;
+    },
+    clearReportData() {
+      this.report = {
         id: null,
+        name: null,
         location: null,
         description: null,
         latitude: null,
         longitude: null,
-        talks: null,
-        commute: null,
+        category: null,
+        report_vehicle: null,
       };
     },
     async show(index) {
-      var element;
-      element = document.getElementById("commute");
-      element.innerHTML =
-        "<p>" + String(this.vehicles[index].commute) + " km</p>";
-      element = document.getElementById("talk");
-      element.innerHTML = "<p>" + String(this.vehicles[index].talks) + "</p>";
-
-      const cases = await CallApi(
-        urlBase + "/case/count/" + this.vehicles[index].id,
-        "GET",
-        null
-      );
-
-      if (cases.length > 0 && cases[0].cases !== null) {
-        element = document.getElementById("cases");
-        element.innerHTML = "<p>" + String(cases[0].cases) + " casos</p>";
-      }
-
-      const timeAvg = await CallApi(
-        urlBase + "/case/avg_time/" + this.vehicles[index].id,
-        "GET",
-        null
-      );
-
-      element = document.getElementById("timeAvg");
-      if (timeAvg.length > 0 && timeAvg[0].avg_time !== null) {
-        element.innerHTML =
-          "<p>" + String(timeAvg[0].avg_time.toFixed(2)) + " horas</p>";
-      } else {
-        element.innerHTML = "<p>N/A</p>";
-      }
-
       this.center = {
-        lat: this.vehicles[index].latitude,
-        lng: this.vehicles[index].longitude,
+        lat: this.reports[index].latitude,
+        lng: this.reports[index].longitude,
       };
     },
-    async addVehicle() {
-      const result = await CallApi(urlBase + "/vehicle", "POST", this.vehicle);
+    async addCase() {
+      const result = await CallApi(urlBase + "/case", "POST", this.case_data);
       if (result.length > 0) {
-        alert("Unidad agregada a base de datos.");
-        window.location.href = "dashboard";
+        alert("Caso agregado a base de datos.");
+        window.location.href = "reports";
       } else {
         alert(
-          "No se pudo agregar la unidad, verifique los datos e intente de nuevo."
+          "No se pudo agregar el caso, verifique los datos e intente de nuevo."
         );
       }
     },
-    async updateVehicle() {
-      const result = await CallApi(urlBase + "/vehicle", "PUT", this.vehicle);
+    async addReport() {
+      const result = await CallApi(urlBase + "/report", "POST", this.report);
       if (result.length > 0) {
-        alert("Unidad actualizada en base de datos.");
-        window.location.href = "dashboard";
+        alert("Reporte agregado a base de datos.");
+        window.location.href = "reports";
       } else {
         alert(
-          "No se pudo actualizar la unidad, verifique los datos e intente de nuevo."
+          "No se pudo agregar el reporte, verifique los datos e intente de nuevo."
         );
       }
     },
-    async deleteVehicle(id) {
-      const result = await CallApi(urlBase + "/vehicle/" + id, "DELETE", null);
+    async updateReport() {
+      const result = await CallApi(urlBase + "/report", "PUT", this.report);
       if (result.length > 0) {
-        alert("Unidad eliminada de base de datos.");
-        window.location.href = "dashboard";
+        alert("Reporte actualizado en base de datos.");
+        window.location.href = "reports";
       } else {
         alert(
-          "No se pudo eliminar la unidad, verifique los datos e intente de nuevo."
+          "No se pudo actualizar el reporte, verifique los datos e intente de nuevo."
+        );
+      }
+    },
+    async deleteReport(report) {
+      const result = await CallApi(
+        urlBase + "/report/" + report.id,
+        "DELETE",
+        null
+      );
+      if (result.length > 0) {
+        alert("Reporte eliminado de base de datos.");
+        this.setCaseData(report.report_vehicle);
+        this.TogglePopup("deleteReportTrigger");
+      } else {
+        alert(
+          "No se pudo eliminar el reporte, verifique los datos e intente de nuevo."
         );
       }
     },
   },
 
   async mounted() {
-    if (this.role !== "admin") {
+    if (this.username == "") {
       window.location.href = "index.html";
     } else {
-      var result = await CallApi(urlBase + "/vehicle", "GET", null);
-      if (result.length > 0) {
-        this.vehicles = result;
-      } else {
-        alert("No se encontraron unidades");
-      }
+      if (this.role == "admin") {
+        var result = await CallApi(urlBase + "/vehicle", "GET", null);
+        if (result.length > 0) {
+          this.vehicles = result;
+        } else {
+          alert("No se encontraron unidades");
+        }
 
-      result = await CallApi(urlBase + "/report", "GET", null);
-      if (result.length > 0) {
-        this.reports = result;
+        result = await CallApi(urlBase + "/report", "GET", null);
+        if (result.length > 0) {
+          this.reports = result;
+        } else {
+          alert("No se encontraron reportes");
+        }
       } else {
-        alert("No se encontraron reportes");
+        if (this.user_vehicle) {
+          result = await CallApi(
+            urlBase + "/vehicle/" + this.user_vehicle,
+            "GET",
+            null
+          );
+          if (result.length > 0) {
+            this.vehicles = result;
+          } else {
+            alert("No se encontraron unidades");
+          }
+
+          result = await CallApi(
+            urlBase + "/report/vehicle/" + this.user_vehicle,
+            "GET",
+            null
+          );
+          if (result.length > 0) {
+            this.reports = result;
+          } else {
+            alert("No se encontraron reportes");
+          }
+        } else {
+          result = await CallApi(
+            urlBase + "/report/unassigned/list",
+            "GET",
+            null
+          );
+          if (result.length > 0) {
+            this.reports = result;
+          } else {
+            alert("No se encontraron reportes");
+          }
+        }
       }
     }
   },
@@ -444,7 +501,7 @@ export default {
 }
 
 /* Float four columns side by side */
-.vehicle-list {
+.report-list {
   padding: 10px 10px;
 }
 
